@@ -203,6 +203,8 @@ _cairo_gstate_fini (cairo_gstate_t *gstate)
     cairo_scaled_font_destroy (gstate->scaled_font);
     gstate->scaled_font = NULL;
 
+    _cairo_font_options_fini (&gstate->font_options);
+
     _cairo_clip_destroy (gstate->clip);
 
     cairo_list_del (&gstate->device_transform_observer.link);
@@ -1753,14 +1755,14 @@ _cairo_gstate_set_font_options (cairo_gstate_t             *gstate,
 
     _cairo_gstate_unset_scaled_font (gstate);
 
-    _cairo_font_options_init_copy (&gstate->font_options, options);
+    _cairo_font_options_copy (&gstate->font_options, options);
 }
 
 void
 _cairo_gstate_get_font_options (cairo_gstate_t       *gstate,
 				cairo_font_options_t *options)
 {
-    *options = gstate->font_options;
+    _cairo_font_options_copy (options, &gstate->font_options);
 }
 
 cairo_status_t
@@ -1905,8 +1907,10 @@ _cairo_gstate_ensure_scaled_font (cairo_gstate_t *gstate)
     if (unlikely (status))
 	return status;
 
+    _cairo_font_options_init_default (&options);
     cairo_surface_get_font_options (gstate->target, &options);
     cairo_font_options_merge (&options, &gstate->font_options);
+    _cairo_font_options_fini (&options);
 
     cairo_matrix_multiply (&font_ctm,
 			   &gstate->ctm,

@@ -887,6 +887,13 @@ cairo_private void
 _cairo_font_options_fini (cairo_font_options_t *options);
 
 cairo_private void
+_cairo_font_options_reinit_default (cairo_font_options_t *options);
+
+cairo_private void
+_cairo_font_options_copy (cairo_font_options_t		*options,
+			  const cairo_font_options_t	*other);
+
+cairo_private void
 _cairo_font_options_set_lcd_filter (cairo_font_options_t   *options,
 				   cairo_lcd_filter_t  lcd_filter);
 

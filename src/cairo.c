@@ -3273,7 +3273,7 @@ cairo_get_font_options (cairo_t              *cr,
 	return;
 
     if (unlikely (cr->status)) {
-	_cairo_font_options_init_default (options);
+	_cairo_font_options_reinit_default (options);
 	return;
     }
 

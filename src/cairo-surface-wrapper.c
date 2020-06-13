@@ -422,6 +422,7 @@ _cairo_surface_wrapper_show_text_glyphs (cairo_surface_wrapper_t *wrapper,
     if (_cairo_clip_is_all_clipped (dev_clip))
 	return CAIRO_INT_STATUS_NOTHING_TO_DO;
 
+    _cairo_font_options_init_default (&options);
     cairo_surface_get_font_options (wrapper->target, &options);
     cairo_font_options_merge (&options, &scaled_font->options);
 
@@ -493,6 +494,7 @@ _cairo_surface_wrapper_show_text_glyphs (cairo_surface_wrapper_t *wrapper,
 					      dev_scaled_font,
 					      dev_clip);
  FINISH:
+    _cairo_font_options_fini (&options);
     _cairo_clip_destroy (dev_clip);
     if (dev_glyphs != stack_glyphs)
 	free (dev_glyphs);

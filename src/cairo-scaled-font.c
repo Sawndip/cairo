@@ -888,6 +888,7 @@ _cairo_scaled_font_fini_internal (cairo_scaled_font_t *scaled_font)
 
     cairo_font_face_destroy (scaled_font->font_face);
     cairo_font_face_destroy (scaled_font->original_font_face);
+    _cairo_font_options_fini (&scaled_font->options);
 
     CAIRO_MUTEX_FINI (scaled_font->mutex);
 
@@ -3184,7 +3185,7 @@ cairo_scaled_font_get_font_options (cairo_scaled_font_t		*scaled_font,
 	return;
 
     if (scaled_font->status) {
-	_cairo_font_options_init_default (options);
+	_cairo_font_options_reinit_default (options);
 	return;
     }
 

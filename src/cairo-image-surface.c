@@ -1030,7 +1030,7 @@ void
 _cairo_image_surface_get_font_options (void                  *abstract_surface,
 				       cairo_font_options_t  *options)
 {
-    _cairo_font_options_init_default (options);
+    _cairo_font_options_reinit_default (options);
 
     cairo_font_options_set_hint_metrics (options, CAIRO_HINT_METRICS_ON);
     _cairo_font_options_set_round_glyph_positions (options, CAIRO_ROUND_GLYPH_POS_ON);

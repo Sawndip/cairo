@@ -237,8 +237,10 @@ _cairo_paginated_surface_create_image_surface (void	       *abstract_surface,
 						      width,
 						      height);
 
+    _cairo_font_options_init_default (&options);
     cairo_surface_get_font_options (&surface->base, &options);
     _cairo_surface_set_font_options (image, &options);
+    _cairo_font_options_fini (&options);
 
     return image;
 }

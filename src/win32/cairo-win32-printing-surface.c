@@ -1343,7 +1343,7 @@ static void
 _cairo_win32_printing_surface_get_font_options (void                  *abstract_surface,
                                                 cairo_font_options_t  *options)
 {
-    _cairo_font_options_init_default (options);
+    _cairo_font_options_reinit_default (options);
 
     cairo_font_options_set_hint_style (options, CAIRO_HINT_STYLE_NONE);
     cairo_font_options_set_hint_metrics (options, CAIRO_HINT_METRICS_OFF);

@@ -532,7 +532,8 @@ _cairo_xcb_surface_get_font_options (void *abstract_surface,
 {
     cairo_xcb_surface_t *surface = abstract_surface;
 
-    *options = *_cairo_xcb_screen_get_font_options (surface->screen);
+    _cairo_font_options_copy (options,
+			      _cairo_xcb_screen_get_font_options (surface->screen));
 }
 
 static cairo_status_t

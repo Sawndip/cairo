@@ -90,6 +90,21 @@ _cairo_font_options_init_copy (cairo_font_options_t		*options,
     options->variations = other->variations ? strdup (other->variations) : NULL;
 }
 
+void
+_cairo_font_options_reinit_default (cairo_font_options_t *options)
+{
+    _cairo_font_options_fini (options);
+    _cairo_font_options_init_default (options);
+}
+
+void
+_cairo_font_options_copy (cairo_font_options_t		*options,
+			  const cairo_font_options_t	*other)
+{
+    _cairo_font_options_fini (options);
+    _cairo_font_options_init_copy (options, other);
+}
+
 /**
  * cairo_font_options_create:
  *
@@ -158,6 +173,7 @@ void
 _cairo_font_options_fini (cairo_font_options_t *options)
 {
     free (options->variations);
+    options->variations = NULL;
 }
 
 /**
